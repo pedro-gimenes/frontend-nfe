@@ -1,0 +1,73 @@
+<h1>
+
+Relatórios NF-e
+
+</h1>
+
+<hr>
+
+<div>
+
+<label>
+
+UUID da NF-e
+
+</label>
+
+<br>
+
+<input
+
+type="text"
+
+[(ngModel)]="uuid">
+
+</div>
+
+<br>
+
+<div>
+
+<label>
+
+Tipo do Arquivo
+
+</label>
+
+<br>
+
+<select
+
+[(ngModel)]="tipoArquivo">
+
+<option value="CSV">
+
+CSV
+
+</option>
+
+<option value="XML">
+
+XML
+
+</option>
+
+<option value="DANFE">
+
+DANFE
+
+</option>
+
+</select>
+
+</div>
+
+<br>
+
+<button
+
+(click)="gerar()">
+
+Gerar Relatório
+
+</button>
