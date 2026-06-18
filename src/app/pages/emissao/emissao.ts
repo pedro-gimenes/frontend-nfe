@@ -1,34 +1,27 @@
 import { Component } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
 
 import { EmissaoService } from '../../core/services/emissao.service';
-
 import { EmissaoRequest } from '../../models/emissao/emissao-request';
 
 @Component({
-
   selector: 'app-emissao',
 
   standalone: true,
 
   imports: [
-
     CommonModule,
-
     FormsModule
-
   ],
 
   templateUrl: './emissao.html',
 
   styleUrl: './emissao.css'
-
 })
-
 export class Emissao {
+
+  etapa = 1;
 
   request: EmissaoRequest = {
 
@@ -85,9 +78,7 @@ export class Emissao {
     },
 
     produtos: [
-
       {
-
         item: 1,
 
         nome: '',
@@ -121,9 +112,7 @@ export class Emissao {
         gtin: '',
 
         gtinTributavel: ''
-
       }
-
     ],
 
     pedido: {
@@ -159,9 +148,7 @@ export class Emissao {
       notaEmpenho: '',
 
       pagamentos: [
-
         {
-
           formaPagamento: '',
 
           descricaoPagamento: '',
@@ -181,9 +168,7 @@ export class Emissao {
           cnpjBeneficiario: '',
 
           idTerminalPag: ''
-
         }
-
       ]
 
     },
@@ -197,82 +182,55 @@ export class Emissao {
   resposta: any;
 
   constructor(
-
     private service: EmissaoService
-
   ) {}
 
-  adicionarProduto() {
+  proximo() {
 
-    this.request.produtos.push({
+    if(this.etapa < 5){
 
-      item: this.request.produtos.length + 1,
+      this.etapa++;
 
-      nome: '',
-
-      codigo: '',
-
-      ncm: '',
-
-      cest: '',
-
-      unidade: 'UN',
-
-      origem: 0,
-
-      quantidade: 1,
-
-      peso: 0,
-
-      subtotal: 0,
-
-      desconto: 0,
-
-      total: 0,
-
-      classeImposto: '',
-
-      beneficioFiscal: '',
-
-      informacoesAdicionais: '',
-
-      gtin: '',
-
-      gtinTributavel: ''
-
-    });
+    }
 
   }
 
-  removerProduto(index: number) {
+  anterior(){
 
-    this.request.produtos.splice(index, 1);
+    if(this.etapa > 1){
+
+      this.etapa--;
+
+    }
 
   }
 
-  emitir() {
+  adicionarProduto(){
 
-    this.service
+    // ...
+  }
 
-      .emitir(this.request)
+  removerProduto(index:number){
+
+    this.request.produtos.splice(index,1);
+
+  }
+
+  emitir(){
+
+    this.service.emitir(this.request)
 
       .subscribe({
 
-        next: (response) => {
+        next:(response)=>{
 
           this.resposta = response;
 
-          alert('NF-e emitida com sucesso');
-
-          console.log(response);
-
         },
 
-        error: (error) => {
+        error:(error)=>{
 
           console.error(error);
-
-          alert('Erro ao emitir NF-e');
 
         }
 

@@ -1,31 +1,113 @@
-input{
+.container{
 
-display:block;
+    max-width:1000px;
 
-width:400px;
-
-height:35px;
-
-margin-bottom:10px;
+    margin:auto;
 
 }
 
-button{
+.steps{
 
-padding:10px;
+    display:flex;
 
-cursor:pointer;
+    justify-content:space-between;
+
+    margin-bottom:40px;
+
+}
+
+.step{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:15px;
+
+    border-bottom:3px solid #dcdcdc;
+
+    color:#999;
+
+    font-weight:600;
+
+}
+
+.step.active{
+
+    border-bottom:3px solid #2563eb;
+
+    color:#2563eb;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 4px 20px rgba(0,0,0,.1);
+
+}
+
+input{
+
+    width:100%;
+
+    height:42px;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    border:1px solid #dcdcdc;
+
+    border-radius:8px;
 
 }
 
 .produto{
 
-border:1px solid #ccc;
+    border:1px solid #e5e5e5;
 
-padding:20px;
+    padding:20px;
 
-margin-bottom:20px;
+    border-radius:12px;
 
-border-radius:10px;
+    margin-bottom:20px;
+
+}
+
+.actions{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+button{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    opacity:.9;
 
 }

@@ -1,46 +1,22 @@
 import { Component } from '@angular/core';
-
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
-
   selector: 'app-dashboard',
-
   standalone: true,
 
   imports: [
-
     RouterLink
-
   ],
 
   templateUrl: './dashboard.html',
-
   styleUrl: './dashboard.css'
-
 })
-
 export class Dashboard {
 
-  constructor(
+  logout() {
 
-    private router: Router
-
-  ){}
-
-  logout(){
-
-    localStorage.removeItem(
-
-      'token'
-
-    );
-
-    this.router.navigate([
-
-      '/login'
-
-    ]);
+    localStorage.removeItem('token');
 
   }
 

@@ -1,381 +1,69 @@
-<h1>
-
-Emissão NF-e
-
-</h1>
-
-<hr>
-
-<h2>
-
-Dados Gerais
-
-</h2>
-
-<input
-
-placeholder="ID"
-
-[(ngModel)]="request.id">
-
-<input
-
-placeholder="Operação"
-
-type="number"
-
-[(ngModel)]="request.operacao">
-
-<input
-
-placeholder="Natureza Operação"
-
-[(ngModel)]="request.naturezaOperacao">
-
-<input
-
-placeholder="Finalidade"
-
-type="number"
-
-[(ngModel)]="request.finalidade">
-
-<br>
-
-<label>
-
-Data Emissão
-
-</label>
-
-<input
-
-type="datetime-local"
-
-[(ngModel)]="request.dataEmissao">
-
-<label>
-
-Data Entrada/Saída
-
-</label>
-
-<input
-
-type="datetime-local"
-
-[(ngModel)]="request.dataEntradaSaida">
-
-<hr>
-
-<h2>
-
-Cliente
-
-</h2>
-
-<input
-
-placeholder="CPF/CNPJ"
-
-[(ngModel)]="request.cliente.cpf">
-
-<input
-
-placeholder="Nome"
-
-[(ngModel)]="request.cliente.nomeCompleto">
-
-<input
-
-placeholder="Email"
-
-[(ngModel)]="request.cliente.email">
-
-<input
-
-placeholder="Telefone"
-
-[(ngModel)]="request.cliente.telefone">
-
-<input
-
-placeholder="Endereço"
-
-[(ngModel)]="request.cliente.endereco">
-
-<input
-
-placeholder="Número"
-
-[(ngModel)]="request.cliente.numero">
-
-<input
-
-placeholder="Bairro"
-
-[(ngModel)]="request.cliente.bairro">
-
-<input
-
-placeholder="Município"
-
-[(ngModel)]="request.cliente.cidade">
-
-<input
-
-placeholder="UF"
-
-[(ngModel)]="request.cliente.uf">
-
-<input
-
-placeholder="CEP"
-
-[(ngModel)]="request.cliente.cep">
-
-<hr>
-
-<h2>
-
-Produtos
-
-</h2>
-
-<div
-
-*ngFor="let produto of request.produtos; let i = index"
-
-class="produto">
-
-<h3>
-
-Produto {{i+1}}
-
-</h3>
-
-<input
-
-placeholder="Código"
-
-[(ngModel)]="produto.codigo">
-
-<input
-
-placeholder="Nome"
-
-[(ngModel)]="produto.nome">
-
-<input
-
-placeholder="Quantidade"
-
-type="number"
-
-[(ngModel)]="produto.quantidade">
-
-<input
-
-placeholder="Unidade"
-
-[(ngModel)]="produto.unidade">
-
-<input
-
-placeholder="Peso"
-
-type="number"
-
-[(ngModel)]="produto.peso">
-
-<input
-
-placeholder="Origem"
-
-type="number"
-
-[(ngModel)]="produto.origem">
-
-<input
-
-placeholder="Subtotal"
-
-type="number"
-
-[(ngModel)]="produto.subtotal">
-
-<input
-
-placeholder="Total"
-
-type="number"
-
-[(ngModel)]="produto.total">
-
-<input
-
-placeholder="Classe Imposto"
-
-[(ngModel)]="produto.classeImposto">
-
+<div class="steps">
+  <div class="step" [class.active]="etapa==1"> Dados NF-e </div>
+  <div class="step" [class.active]="etapa==2"> Cliente </div>
+  <div class="step" [class.active]="etapa==3"> Produtos </div>
+  <div class="step" [class.active]="etapa==4"> Pedido </div>
+  <div class="step" [class.active]="etapa==5"> Resumo </div>
 </div>
-
-<button
-
-(click)="adicionarProduto()">
-
-+ Adicionar Produto
-
-</button>
-
-<hr>
-
-<h2>
-
-Pedido
-
-</h2>
-
-<input
-
-placeholder="Pagamento"
-
-type="number"
-
-[(ngModel)]="request.pedido.pagamento">
-
-<input
-
-placeholder="Presença"
-
-type="number"
-
-[(ngModel)]="request.pedido.presenca">
-
-<input
-
-placeholder="Modalidade Frete"
-
-type="number"
-
-[(ngModel)]="request.pedido.modalidadeFrete">
-
-<input
-
-placeholder="Frete"
-
-type="number"
-
-[(ngModel)]="request.pedido.frete">
-
-<input
-
-placeholder="Desconto"
-
-type="number"
-
-[(ngModel)]="request.pedido.desconto">
-
-<input
-
-placeholder="Total"
-
-type="number"
-
-[(ngModel)]="request.pedido.total">
-
-<hr>
-
-<label>
-
-<input
-
-type="checkbox"
-
-[(ngModel)]="request.previaDanfe">
-
-Prévia DANFE
-
-</label>
-
-<label>
-
-<input
-
-type="checkbox"
-
-[(ngModel)]="request.assincrono">
-
-Assíncrono
-
-</label>
-
-<br><br>
-
-<button
-
-(click)="emitir()">
-
-Emitir NF-e
-
-</button>
-
-<hr>
-
-<div *ngIf="resposta">
-
-<h2>
-
-Resultado
-
-</h2>
-
-<p>
-
-UUID:
-
-{{resposta.uuid}}
-
-</p>
-
-<p>
-
-Status:
-
-{{resposta.status}}
-
-</p>
-
-<p>
-
-Motivo:
-
-{{resposta.motivo}}
-
-</p>
-
-<p>
-
-Número:
-
-{{resposta.numeroNfe}}
-
-</p>
-
-<p>
-
-Série:
-
-{{resposta.serie}}
-
-</p>
-
-<p>
-
-Chave:
-
-{{resposta.chaveAcesso}}
-
-</p>
-
+<div class="card"> <!-- ETAPA 1 -->
+  <div *ngIf="etapa==1">
+    <h2>Dados Gerais</h2> <input placeholder="ID" [(ngModel)]="request.id"> <input placeholder="Operação" type="number"
+      [(ngModel)]="request.operacao"> <input placeholder="Natureza Operação" [(ngModel)]="request.naturezaOperacao">
+    <input placeholder="Finalidade" type="number" [(ngModel)]="request.finalidade"> <label>Data Emissão</label> <input
+      type="datetime-local" [(ngModel)]="request.dataEmissao"> <label>Data Entrada/Saída</label> <input
+      type="datetime-local" [(ngModel)]="request.dataEntradaSaida">
+  </div> <!-- ETAPA 2 -->
+  <div *ngIf="etapa==2">
+    <h2>Cliente</h2> <input placeholder="CPF" [(ngModel)]="request.cliente.cpf"> <input placeholder="CNPJ"
+      [(ngModel)]="request.cliente.cnpj"> <input placeholder="Nome Completo" [(ngModel)]="request.cliente.nomeCompleto">
+    <input placeholder="Razão Social" [(ngModel)]="request.cliente.razaoSocial"> <input placeholder="Inscrição Estadual"
+      [(ngModel)]="request.cliente.ie"> <input placeholder="Email" [(ngModel)]="request.cliente.email"> <input
+      placeholder="Telefone" [(ngModel)]="request.cliente.telefone"> <input placeholder="Endereço"
+      [(ngModel)]="request.cliente.endereco"> <input placeholder="Complemento"
+      [(ngModel)]="request.cliente.complemento"> <input placeholder="Número" [(ngModel)]="request.cliente.numero">
+    <input placeholder="Bairro" [(ngModel)]="request.cliente.bairro"> <input placeholder="Cidade"
+      [(ngModel)]="request.cliente.cidade"> <input placeholder="UF" [(ngModel)]="request.cliente.uf"> <input
+      placeholder="CEP" [(ngModel)]="request.cliente.cep">
+  </div> <!-- ETAPA 3 -->
+  <div *ngIf="etapa==3">
+    <h2>Produtos</h2>
+    <div *ngFor="let produto of request.produtos; let i=index" class="produto">
+      <h3> Produto {{i+1}} </h3> <input placeholder="Código" [(ngModel)]="produto.codigo"> <input placeholder="Nome"
+        [(ngModel)]="produto.nome"> <input placeholder="NCM" [(ngModel)]="produto.ncm"> <input placeholder="CEST"
+        [(ngModel)]="produto.cest"> <input placeholder="Quantidade" type="number" [(ngModel)]="produto.quantidade">
+      <input placeholder="Unidade" [(ngModel)]="produto.unidade"> <input placeholder="Peso" type="number"
+        [(ngModel)]="produto.peso"> <input placeholder="Origem" type="number" [(ngModel)]="produto.origem"> <input
+        placeholder="Subtotal" type="number" [(ngModel)]="produto.subtotal"> <input placeholder="Desconto" type="number"
+        [(ngModel)]="produto.desconto"> <input placeholder="Total" type="number" [(ngModel)]="produto.total"> <input
+        placeholder="Classe Imposto" [(ngModel)]="produto.classeImposto"> <button *ngIf="request.produtos.length>1"
+        (click)="removerProduto(i)"> Remover Produto </button>
+    </div> <button (click)="adicionarProduto()"> + Adicionar Produto </button>
+  </div> <!-- ETAPA 4 -->
+  <div *ngIf="etapa==4">
+    <h2>Pedido</h2> <input placeholder="Pagamento" type="number" [(ngModel)]="request.pedido.pagamento"> <input
+      placeholder="Presença" type="number" [(ngModel)]="request.pedido.presenca"> <input placeholder="Intermediador"
+      type="number" [(ngModel)]="request.pedido.intermediador"> <input placeholder="Modalidade Frete" type="number"
+      [(ngModel)]="request.pedido.modalidadeFrete"> <input placeholder="Frete" type="number"
+      [(ngModel)]="request.pedido.frete"> <input placeholder="Desconto" type="number"
+      [(ngModel)]="request.pedido.desconto"> <input placeholder="Despesas Acessórias" type="number"
+      [(ngModel)]="request.pedido.despesasAcessorias"> <input placeholder="Total" type="number"
+      [(ngModel)]="request.pedido.total">
+  </div> <!-- ETAPA 5 -->
+  <div *ngIf="etapa==5">
+    <h2>Resumo</h2>
+    <p> Cliente: {{request.cliente.nomeCompleto}} </p>
+    <p> Produtos: {{request.produtos.length}} </p>
+    <p> Total: R$ {{request.pedido.total}} </p> <label> <input type="checkbox" [(ngModel)]="request.previaDanfe"> Prévia
+      DANFE </label> <br><br> <label> <input type="checkbox" [(ngModel)]="request.assincrono"> Assíncrono </label>
+    <hr>
+    <h3>Resultado</h3>
+    <p> UUID: {{resposta?.uuid}} </p>
+    <p> Status: {{resposta?.status}} </p>
+    <p> Motivo: {{resposta?.motivo}} </p>
+    <p> Número: {{resposta?.numeroNfe}} </p>
+    <p> Série: {{resposta?.serie}} </p>
+    <p> Chave: {{resposta?.chaveAcesso}} </p>
+  </div>
+  <div class="actions"> <button *ngIf="etapa>1" (click)="anterior()"> Voltar </button> <button *ngIf="etapa<5"
+      (click)="proximo()"> Próximo </button> <button *ngIf="etapa==5" (click)="emitir()"> Emitir NF-e </button> </div>
 </div>
